@@ -5,15 +5,18 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-typedef struct node {
+struct node {
   int data;
-  struct node *next;
+  struct node * next;
   pthread_mutex_t mutex;
-}node;
+};
 
-int Member(int value, node* head_p);
-int Insert(int value, node ** head_p);
-int Delete(int value, node ** head_p);
+typedef struct node node;
 
+void destructor(node* head_p);
+int Member(int value, node *head_p);
+int Insert(int value, node **head_p);
+int Delete(int value, node **head_p);
+void Print(node * head_p);
 
 #endif
