@@ -41,8 +41,7 @@ int Insert(int value, node** head_p){
     node *temp_p = NULL;
     int ret_value;
 
-    while (NULL != curr_p && curr_p->data < value)
-    {
+    while (NULL != curr_p && curr_p->data < value){
         pred_p = curr_p;
         curr_p = curr_p->next;
     }
@@ -55,14 +54,12 @@ int Insert(int value, node** head_p){
         if(NULL == pred_p){
             *head_p = temp_p;
         }
-        else
-        {
+        else{
             pred_p -> next = temp_p;
         }
         ret_value = 1;
     }
-    else
-    {
+    else{
         ret_value = 0;
     }
     return ret_value;
