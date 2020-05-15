@@ -2,15 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include <pthread.h>
+#include <sys/time.h>
+
 #include "linked_list.h"
 
-#include <sys/time.h>
-#define SERIAL_RUN
 #define MAX 65535
-//#define CON_ONE_MUTEX
-//#define CON_RD_WR_LOCK
-
-void generate_report();
 
 int main(){
 

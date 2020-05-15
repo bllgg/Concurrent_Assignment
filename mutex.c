@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <pthread.h>
-#include "linked_list.h"
-
 #include <sys/time.h>
+
+#include "linked_list.h"
 
 #define MAX 65535
 
@@ -48,7 +48,6 @@ int main(){
     pthread_mutex_init(&mutex, NULL);
 
     // Generate Threads
-    
     pthread_t *thread_handles = malloc(thread_count * sizeof(pthread_t));
     struct timeval stop;
     struct timeval start;
@@ -113,7 +112,5 @@ void *threadFunc(void * rank){
             }
             pthread_mutex_unlock(&mutex);
         }
-    }
-
-    
+    } 
 }
