@@ -6,17 +6,46 @@
 
 #include "linked_list.h"
 #include "serial.h"
+#include "global.h"
 
-#define MAX 65535
-
-unsigned long test_serial_run(void){
+unsigned long test_serial_run(int case_num){
 
     node *head = NULL;
+    float mmem;
+    float mins;
+    float mdel;
 
     int m = 1000; //Number of operations
-    float mmem = 0.99;
-    float mins = 0.005;
-    float mdel = 0.005;
+    switch (case_num)
+    {
+        case 1:{
+            mmem = 0.99;
+            mins = 0.005;
+            mdel = 0.005;
+            break;
+        }
+
+        case 2:{
+            mmem = 0.9;
+            mins = 0.05;
+            mdel = 0.05;
+            break;
+        }
+
+        case 3:{
+            mmem = 0.5;
+            mins = 0.25;
+            mdel = 0.25;
+            break;
+        }
+        
+        default:{
+            mmem = 0.99;
+            mins = 0.005;
+            mdel = 0.005;
+            break;
+        }
+    }
 
     // Fractions of each operation
     int Mem = (int) (m * mmem);

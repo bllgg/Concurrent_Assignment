@@ -8,9 +8,10 @@
 #include <sys/time.h>
 
 #include "linked_list.h"
+#include "global.h"
 
 //#define MAX 65535
 
-unsigned long test_serial_run(void);
+unsigned long test_serial_run(int case_num);
 
 #endif
