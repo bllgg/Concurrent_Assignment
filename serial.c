@@ -15,7 +15,7 @@ unsigned long test_serial_run(int case_num){
     float mins;
     float mdel;
 
-    int m = 1000; //Number of operations
+    int m = 10000; //Number of operations
     switch (case_num)
     {
         case 1:{
@@ -57,7 +57,7 @@ unsigned long test_serial_run(int case_num){
     int delOps = 0;
     int totOps=0;
 
-    int n = 100; //Number of elements in the list
+    int n = 1000; //Number of elements in the list
     int count = 0;
 
     // Generate a linked list with n random numbers

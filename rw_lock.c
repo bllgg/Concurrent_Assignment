@@ -17,7 +17,7 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
     thread_data.head = NULL;
 
     thread_data.thread_count = thread_count; // Number of threads 
-    thread_data.m = 1000; //Number of operations
+    thread_data.m = 10000; //Number of operations
 
     switch (case_num)
     {
@@ -58,7 +58,7 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
     thread_data.delOps = 0;
     thread_data.totOps=0;
 
-    int n = 100; //Number of elements in the list
+    int n = 1000; //Number of elements in the list
     int count = 0;
     
 
