@@ -74,7 +74,7 @@ int Delete(int value, node ** head_p){
         pred_p = curr_p;
         curr_p = curr_p->next;
     }
-    if (NULL != curr_p, curr_p->data == value){
+    if (NULL != curr_p && curr_p->data == value){
         if (NULL == pred_p){
             *head_p = curr_p ->next;
             free(curr_p);
