@@ -1,5 +1,5 @@
-all: linked_list.c linked_list.h main.c
-	gcc -g -o prog linked_list.c main.c -lpthread
+all:
+	gcc -g -o prog linked_list.c serial.c mutex.c rw_lock.c main.c -lpthread
 
 clean:
 	rm prog
