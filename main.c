@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+
 #include "linked_list.h"
 
-#define SERIAL_RUN
-//#define CON_ONE_MUTEX
-//#define CON_RD_WR_LOCK
+#include "serial.h"
+#include "mutex.h"
+#include "rw_lock.h"
+#include "global.h"
 
 void generate_report();
 
 int main(){
 
-    node *head = NULL;
+    /*node *head = NULL;
 
     #ifdef SERIAL_RUN
         printf("Running in serial mode\n");
@@ -49,6 +51,37 @@ int main(){
         printf("Running in concurrent mode with read write locks\n");
     #endif
 
-    destructor(head);
+    destructor(head);*/
+    unsigned long runtime;
+    /*
+    runtime = test_serial_run(1);
+    printf("Serial Runtime = %lu \n", runtime);
+
+    runtime = test_serial_run(2);
+    printf("Serial Runtime = %lu \n", runtime);
+
+    runtime = test_serial_run(3);
+    printf("Serial Runtime = %lu \n", runtime);
+    */
+    
+    runtime = test_mutex_run(1,2);
+    printf("Mutex Runtime = %lu \n", runtime);
+
+    runtime = test_mutex_run(2,2);
+    printf("Mutex Runtime = %lu \n", runtime);
+
+    runtime = test_mutex_run(2,2);
+    printf("Mutex Runtime = %lu \n", runtime);
+
+
+    runtime = test_rw_lock_run(1,2);
+    printf("RW_lock Runtime = %lu \n", runtime);
+
+    runtime = test_rw_lock_run(2,2);
+    printf("RW_lock Runtime = %lu \n", runtime);
+
+    runtime = test_rw_lock_run(2,2);
+    printf("RW_lock Runtime = %lu \n", runtime);
+    
     return 0;
 }
