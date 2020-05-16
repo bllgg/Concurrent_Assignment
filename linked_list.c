@@ -14,7 +14,7 @@ void destructor(node* head_p){
         curr_p = curr_p->next;
         free(temp_p);
     }
-    printf("Entire linked list destructed!!\n");
+    //printf("Entire linked list destructed!!\n");
 }
 
 int Member(int value, node* head_p){
