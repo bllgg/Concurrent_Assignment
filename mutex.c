@@ -49,9 +49,6 @@ unsigned long test_mutex_run(int case_num, int thread_count){
             break;
         }
     }
-    thread_data.mmem = 0.99;
-    thread_data.mins = 0.005;
-    thread_data.mdel = 0.005;
 
     thread_data.insOps = 0;
     thread_data.memOps= 0;
@@ -83,6 +80,7 @@ unsigned long test_mutex_run(int case_num, int thread_count){
     gettimeofday(&start, NULL);
     //Assign work to threads
     for (int thread=0; thread<thread_data.thread_count ; thread++){
+        thread_data.rank = thread;
         pthread_create(&thread_handles[thread],NULL,threadFunc_mtx,(void*) &thread_data);
     }
 

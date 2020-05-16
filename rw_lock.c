@@ -83,6 +83,7 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
     gettimeofday(&start, NULL); 
     //Assign work to threads
     for (int thread=0; thread<thread_data.thread_count ; thread++){
+        thread_data.rank = thread;
         pthread_create(&thread_handles[thread],NULL,threadFunc_rw,(void*) &thread_data);
     }
 
