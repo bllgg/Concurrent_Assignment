@@ -102,6 +102,7 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
     //printf("took %lu us\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec); 
 
     destructor(thread_data.head);
+    printf("RW_lock ran!\n");
     return time;
 }
 

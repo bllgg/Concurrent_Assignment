@@ -103,5 +103,6 @@ unsigned long test_serial_run(int case_num){
     //printf("took %lu us\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec); 
 
     destructor(head);
+    printf("Serial ran!\n");
     return time;
 }
