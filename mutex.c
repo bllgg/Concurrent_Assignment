@@ -133,7 +133,7 @@ void *threadFunc_mtx(void * t_data){
             pthread_mutex_unlock(&thread_data->mutex);
             
         }
-        else if(op==2 && thread_data->memOps < thread_data->Mem){
+        else if(thread_data->memOps < thread_data->Mem){
             pthread_mutex_lock(&thread_data->mutex);
             if (thread_data->totOps<thread_data->m){
                 short res = Member(rand_value, thread_data->head);

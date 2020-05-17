@@ -89,7 +89,7 @@ unsigned long test_serial_run(int case_num){
             totOps++;
             //printf("Operation %d , Delete %d %d\n", totOps, rand_value, res);
         }
-        else if(op==2 && memOps < Mem){
+        else if(memOps < Mem){
             short res = Member(rand_value, head);
             memOps++;
             totOps++;

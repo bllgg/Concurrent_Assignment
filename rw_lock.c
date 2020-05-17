@@ -137,7 +137,7 @@ void *threadFunc_rw(void * t_data){
             }
             
         }
-        else if(op==2 && thread_data->memOps < thread_data->Mem){
+        else if(thread_data->memOps < thread_data->Mem){
             if (thread_data->totOps<thread_data->m){
                 pthread_rwlock_rdlock(&thread_data->rwlock);
                 short res = Member(rand_value, thread_data->head);
