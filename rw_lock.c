@@ -116,35 +116,37 @@ void *threadFunc_rw(void * t_data){
         int op = rand() % 3;
 
         if (op==0 && thread_data->insOps < thread_data->Ins){
-            pthread_rwlock_wrlock(&thread_data->rwlock);
             if (thread_data->totOps<thread_data->m){
+                pthread_rwlock_wrlock(&thread_data->rwlock);
                 short res = Insert(rand_value, &thread_data->head);
+                pthread_rwlock_unlock(&thread_data->rwlock);
                 thread_data->insOps++;
                 thread_data->totOps++;
                 //printf("Thread %ld Operation %d , Insert %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res);
             }
-            pthread_rwlock_unlock(&thread_data->rwlock);
+            
         }
         else if(op==1 && thread_data->delOps < thread_data->Del){
-            pthread_rwlock_wrlock(&thread_data->rwlock);
             if (thread_data->totOps<thread_data->m){
+                pthread_rwlock_wrlock(&thread_data->rwlock);
                 short res = Delete(rand_value, &thread_data->head);
+                pthread_rwlock_unlock(&thread_data->rwlock);
                 thread_data->delOps++;
                 thread_data->totOps++;
                 //printf("Thread %ld Operation %d , Delete %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res);
             }
-            pthread_rwlock_unlock(&thread_data->rwlock);
             
         }
         else if(op==2 && thread_data->memOps < thread_data->Mem){
-            pthread_rwlock_rdlock(&thread_data->rwlock);
             if (thread_data->totOps<thread_data->m){
+                pthread_rwlock_rdlock(&thread_data->rwlock);
                 short res = Member(rand_value, thread_data->head);
+                pthread_rwlock_unlock(&thread_data->rwlock);
                 thread_data->memOps++;
                 thread_data->totOps++;
                 //printf("Thread %ld Operation %d , Search %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res); 
             }
-            pthread_rwlock_unlock(&thread_data->rwlock);
+            
         }
     } 
 }
