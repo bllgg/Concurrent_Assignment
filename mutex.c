@@ -16,7 +16,7 @@ unsigned long test_mutex_run(int case_num, int thread_count){
 
     thread_data.head = NULL;
 
-    thread_data.thread_count = thread_count; // Number of threads 
+    //thread_data.thread_count = thread_count; // Number of threads 
     thread_data.m = 10000; //Number of operations
 
     switch (case_num)
@@ -74,19 +74,19 @@ unsigned long test_mutex_run(int case_num, int thread_count){
     pthread_mutex_init(&thread_data.mutex, NULL);
 
     // Generate Threads
-    pthread_t *thread_handles = malloc(thread_data.thread_count * sizeof(pthread_t));
+    pthread_t *thread_handles = malloc(thread_count * sizeof(pthread_t));
     struct timeval stop;
     struct timeval start;
     gettimeofday(&start, NULL);
     //Assign work to threads
-    for (int thread=0; thread<thread_data.thread_count ; thread++){
+    for (int thread=0; thread < thread_count ; thread++){
         thread_data.rank = thread;
         pthread_create(&thread_handles[thread],NULL,threadFunc_mtx,(void*) &thread_data);
     }
 
     //printf("Hello from main thread\n");
 
-    for (int thread=0; thread<thread_data.thread_count ; thread++){
+    for (int thread=0; thread < thread_count ; thread++){
         pthread_join(thread_handles[thread],NULL);
     }
 
