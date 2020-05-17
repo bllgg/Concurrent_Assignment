@@ -94,6 +94,7 @@ unsigned long test_mutex_run(int case_num, int thread_count){
     
     //Function call
     gettimeofday(&stop, NULL);
+    pthread_mutex_destroy(&thread_data.mutex);
     unsigned long time;
     time = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
     //printf("took %lu us\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec); 
@@ -113,35 +114,37 @@ void *threadFunc_mtx(void * t_data){
         int op = rand() % 3;
 
         if (op==0 && thread_data->insOps < thread_data->Ins){
-            pthread_mutex_lock(&thread_data->mutex);
             if (thread_data->totOps<thread_data->m){
+                pthread_mutex_lock(&thread_data->mutex);
                 short res = Insert(rand_value, &thread_data->head);
+                pthread_mutex_unlock(&thread_data->mutex);
                 thread_data->insOps++;
                 thread_data->totOps++;
                 //printf("Thread %ld Operation %d , Insert %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res);
             }
-            pthread_mutex_unlock(&thread_data->mutex);
+            
         }
         else if(op==1 && thread_data->delOps < thread_data->Del){
-            pthread_mutex_lock(&thread_data->mutex);
             if (thread_data->totOps<thread_data->m){
+                pthread_mutex_lock(&thread_data->mutex);
                 short res = Delete(rand_value, &thread_data->head);
+                pthread_mutex_unlock(&thread_data->mutex);
                 thread_data->delOps++;
                 thread_data->totOps++;
                 //printf("Thread %ld Operation %d , Delete %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res);
             }
-            pthread_mutex_unlock(&thread_data->mutex);
             
         }
         else if(thread_data->memOps < thread_data->Mem){
-            pthread_mutex_lock(&thread_data->mutex);
             if (thread_data->totOps<thread_data->m){
+                pthread_mutex_lock(&thread_data->mutex);
                 short res = Member(rand_value, thread_data->head);
+                pthread_mutex_unlock(&thread_data->mutex);
                 thread_data->memOps++;
                 thread_data->totOps++;
                 //printf("Thread %ld Operation %d , Search %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res); 
             }
-            pthread_mutex_unlock(&thread_data->mutex);
+            
         }
     } 
 }

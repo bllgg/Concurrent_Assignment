@@ -16,7 +16,7 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
 
     thread_data.head = NULL;
 
-    thread_data.thread_count = thread_count; // Number of threads 
+    //thread_data.thread_count = thread_count; // Number of threads 
     thread_data.m = 10000; //Number of operations
 
     switch (case_num)
@@ -49,9 +49,6 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
             break;
         }
     }
-    thread_data.mmem = 0.99;
-    thread_data.mins = 0.005;
-    thread_data.mdel = 0.005;
 
     thread_data.insOps = 0;
     thread_data.memOps= 0;
@@ -77,19 +74,19 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
     pthread_rwlock_init(&thread_data.rwlock, NULL);
 
     // Generate Threads
-    pthread_t *thread_handles = malloc(thread_data.thread_count * sizeof(pthread_t));
+    pthread_t *thread_handles = malloc(thread_count * sizeof(pthread_t));
     struct timeval stop;
     struct timeval start;
     gettimeofday(&start, NULL); 
     //Assign work to threads
-    for (int thread=0; thread<thread_data.thread_count ; thread++){
+    for (int thread=0; thread<thread_count ; thread++){
         thread_data.rank = thread;
         pthread_create(&thread_handles[thread],NULL,threadFunc_rw,(void*) &thread_data);
     }
 
     //printf("Hello from main thread\n");
 
-    for (int thread=0; thread<thread_data.thread_count ; thread++){
+    for (int thread=0; thread<thread_count ; thread++){
         pthread_join(thread_handles[thread],NULL);
     }
 
@@ -97,6 +94,7 @@ unsigned long test_rw_lock_run(int case_num, int thread_count){
     
     //Function call
     gettimeofday(&stop, NULL);
+    pthread_rwlock_destroy(&thread_data.rwlock);
     unsigned long time;
     time = (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec;
     //printf("took %lu us\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec); 
