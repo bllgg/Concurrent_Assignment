@@ -117,9 +117,9 @@ void *threadFunc_mtx(void * t_data){
             if (thread_data->totOps<thread_data->m){
                 pthread_mutex_lock(&thread_data->mutex);
                 short res = Insert(rand_value, &thread_data->head);
-                pthread_mutex_unlock(&thread_data->mutex);
                 thread_data->insOps++;
                 thread_data->totOps++;
+                pthread_mutex_unlock(&thread_data->mutex);
                 //printf("Thread %ld Operation %d , Insert %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res);
             }
             
@@ -128,9 +128,9 @@ void *threadFunc_mtx(void * t_data){
             if (thread_data->totOps<thread_data->m){
                 pthread_mutex_lock(&thread_data->mutex);
                 short res = Delete(rand_value, &thread_data->head);
-                pthread_mutex_unlock(&thread_data->mutex);
                 thread_data->delOps++;
                 thread_data->totOps++;
+                pthread_mutex_unlock(&thread_data->mutex);
                 //printf("Thread %ld Operation %d , Delete %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res);
             }
             
@@ -139,9 +139,9 @@ void *threadFunc_mtx(void * t_data){
             if (thread_data->totOps<thread_data->m){
                 pthread_mutex_lock(&thread_data->mutex);
                 short res = Member(rand_value, thread_data->head);
-                pthread_mutex_unlock(&thread_data->mutex);
                 thread_data->memOps++;
                 thread_data->totOps++;
+                pthread_mutex_unlock(&thread_data->mutex);
                 //printf("Thread %ld Operation %d , Search %d %d\n", thread_data->rank, thread_data->totOps, rand_value, res); 
             }
             
